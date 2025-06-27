@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>لیست ثبت‌نام‌ها</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html">صفحه اصلی</a>
+    <a href="register.html">ثبت‌نام</a>
+    <a href="admin.html">مشاهده ثبت‌نام‌ها</a>
+  </nav>
+
+  <div class="container">
+    <h2>افراد ثبت‌نام‌شده</h2>
+    <ul id="userList"></ul>
+  </div>
+
+  <script>
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const userList = document.getElementById('userList');
+
+    if (users.length === 0) {
+      userList.innerHTML = "<li>هیچ ثبت‌نامی هنوز انجام نشده.</li>";
+    } else {
+      users.forEach((user, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `${index + 1} - ${user.name} | 📞 ${user.phone}`;
+        userList.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
